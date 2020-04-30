@@ -1,30 +1,33 @@
 
-samplesTabUI <- function(id){
-  
+samplesTabUI <- function(id) {
   ns <- NS(id)
-  
-  tagList(
-    
-    h3("Samples"),
-     
-    fluidPage(
-      tabsetPanel(
-      tabPanel("Create","contents"),
-      tabPanel("Reports","contents")
-      
-      
-      )
-    
-    )
-    
-     
-   )
+   uiOutput(ns("samples"))
+           
+           
+          
   
 }
-  
-  
-samplesTab <- function(input,output,session)
-  {
 
-      
+samplesTab<- function(input, output, session) {
+  
+output$samples <- renderUI({
+  
+  ns <- session$ns
+  
+      fluidPage(tabsetPanel(id = "Samples", tabpanel1 , tabpanel2
+                
+              
+               
+        
+               )
+      )
+
+  
+})
+  
+
+tabpanel1 <-   tabPanel("Browse",renderText("test"))
+
+tabpanel2 <-   tabPanel("Browse",renderText("test2"))
+
 }

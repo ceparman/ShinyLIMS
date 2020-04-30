@@ -5,7 +5,7 @@ shinyServer(function(input, output, session) {
 
 
   
-   samples_m     <- callModule(samplesTab,"samplesTab1")
+   samples_m     <- callModule(samplesTab,"samples1")
    experiments_m <- callModule(experimentsTab,"experiments1")
    data_m        <- callModule(dataTab,"data1")
    materials_m   <- callModule(materialsTab,"materials1")

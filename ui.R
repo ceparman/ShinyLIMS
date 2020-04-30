@@ -22,7 +22,7 @@ dashboardPage(
     tabItems(
       tabItem("samples",
               
-              samplesTabUI("samlpes1")        
+              samplesTabUI("samples1")        
               
       ),
       
