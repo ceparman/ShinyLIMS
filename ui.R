@@ -48,13 +48,13 @@ dashboardPage(
       ), 
       tabItem("user",
               
-              userTabUI("user")    
+              userTabUI("user1")    
               
       ), 
       
       tabItem("admin",
               
-              adminTabUI("admin")    
+              adminTabUI("admin1")    
               
       )
     )

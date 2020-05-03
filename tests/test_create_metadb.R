@@ -20,12 +20,12 @@ creds <- readRDS("../CreateScripts/creds.RDS")
 
 url_path = paste0("mongodb+srv://",creds$user,":",creds$pass,"@cluster0-wz8ra.mongodb.net/admin")
 
-
+lims_database <- "lims_test"
 
 db <- mongo(db=lims_database,url = url_path )  
 
 
-create_metadb(db)
+create_metadb(db,valdoc)
 
 
 

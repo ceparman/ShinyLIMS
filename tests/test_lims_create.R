@@ -11,7 +11,7 @@ print(getwd())
 source("../lims_config.R")
 source("../CreateScripts/create_metadb.R")
 source("../CreateScripts/Create_dB.R")
-
+source("../CreateScripts/drop_database.R")
 
 creds <- readRDS("../CreateScripts/creds.RDS")
 
@@ -29,7 +29,7 @@ expect_equal(d$ok,1)
 
 
 
-lims <- lims_create(lims_database,creds,lims_types)
+lims <- lims_create(lims_database,creds,lims_types,valdoc)
 
 test_that("created LIMS successful", {
 expect_equal(lims$createdCollectionAutomatically,F)
@@ -46,6 +46,7 @@ test_that("failed LIMS", {
 
 url_path = paste0("mongodb+srv://",creds$user,":",creds$pass,"@cluster0-wz8ra.mongodb.net/",lims_database)
 
+
 metadb <- mongo(db=lims_database,url = url_path ,collection = "metadb",verbose = T)  
 
 test_that("required fields work", {
@@ -55,6 +56,7 @@ test_that("required fields work", {
   expect_error(metadb$insert(entry))
   
   entry2 <- data.frame(name ="tube",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),
+                       reqtypes=paste("float","string",sep=","),
                        bccount =as.integer(0),bcprefix="Tub",stringsAsFactors = F
                        )
   result <- metadb$insert(entry2)
@@ -66,14 +68,18 @@ test_that("required fields work", {
 
 
 
-entry3<- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),bccount =as.integer(0),bcprefix="Tub",stringsAsFactors = F
-)
+entry3<- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),
+                    reqtypes=paste("float","string",sep=","),
+                    bccount =as.integer(0),bcprefix="Tub",stringsAsFactors = F
+                    )
 
 expect_error(metadb$insert(entry3))
 
 
 
-entry4 <- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),bccount =as.integer(0),bcprefix="Vial",stringsAsFactors = F
+entry4 <- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","), 
+                     reqtypes=paste("float","string",sep=","),
+                      bccount =as.integer(0),bcprefix="Vial",stringsAsFactors = F
 )
 
 result <- metadb$insert(entry4)

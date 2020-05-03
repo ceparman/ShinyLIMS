@@ -1,5 +1,5 @@
 
-lims_create <- function(lims_database,creds,lims_types)
+lims_create <- function(lims_database,creds,lims_types,valdoc)
 {
 
 tryCatch({
@@ -44,7 +44,7 @@ for(x in lims_types){
 }
 
 
-create_metadb(db)
+create_metadb(db,valdoc)
 
 }, error=function(cond){return("Error Creating database")} 
 )  
