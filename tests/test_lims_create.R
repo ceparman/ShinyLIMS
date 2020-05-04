@@ -49,27 +49,27 @@ url_path = paste0("mongodb+srv://",creds$user,":",creds$pass,"@cluster0-wz8ra.mo
 
 metadb <- mongo(db=lims_database,url = url_path ,collection = "metadb",verbose = T)  
 
-test_that("required fields work", {
+test_that("required fields work1", {
 
   entry <- data.frame(type="thing",count=1)
    
   expect_error(metadb$insert(entry))
   
-  entry2 <- data.frame(name ="tube",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),
-                       reqtypes=paste("float","string",sep=","),
+  entry2 <- data.frame(name ="tube",table ="thingsdb",type="container",fields=paste("vol","format",sep=","),
+                       fieldtype=paste("float","string",sep=","),fieldreq = paste("Y","N",sep=","),
                        bccount =as.integer(0),bcprefix="Tub",stringsAsFactors = F
                        )
   result <- metadb$insert(entry2)
   expect_equal(length(result$writeErrors) ,expected =  0)
   
+})
 
 
 
+test_that("required fields work2", {
 
-
-
-entry3<- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","),
-                    reqtypes=paste("float","string",sep=","),
+entry3<- data.frame(name ="vial",table ="thingsdb",type="container",fields=paste("vol","format",sep=","),
+                    fieldtype=paste("float","string",sep=","),fieldreq = paste("true","false",sep=","),
                     bccount =as.integer(0),bcprefix="Tub",stringsAsFactors = F
                     )
 
@@ -77,18 +77,19 @@ expect_error(metadb$insert(entry3))
 
 
 
-entry4 <- data.frame(name ="vial",table ="thingsdb",type="container",reqfields=paste("vol","format",sep=","), 
-                     reqtypes=paste("float","string",sep=","),
+entry4 <- data.frame(name ="vial",table ="thingsdb",type="container",fields=paste("vol","format",sep=","), 
+                     fieldtype=paste("float","string",sep=","),fieldreq = paste("true","false",sep=","),
                       bccount =as.integer(0),bcprefix="Vial",stringsAsFactors = F
 )
 
 result <- metadb$insert(entry4)
 expect_equal(length(result$writeErrors) ,expected =  0)
-})
 
+
+})
 print("pausing")
 
-Sys.sleep(10)
+Sys.sleep(3)
 
 d <- drop_database(lims_database,creds)
 
