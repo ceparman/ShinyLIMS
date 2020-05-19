@@ -1,0 +1,14 @@
+Package: ShinyLIMS
+Type: Package
+Title: Core API fucntions
+Version: 0.0.1
+Author: Craig Parman
+Maintainer: Craig Parman <info@ngsanallytics.com>
+Description: The package functions use by the ShinyLIMS app.  
+License: GPL-2 | GPL-3
+LazyData: TRUE
+Imports: httr,jsonlite,mongolite,knitr, rmarkdown
+Suggests: testthat
+RoxygenNote: 7.1.0
+Encoding: UTF-8
+VignetteBuilder: knitr

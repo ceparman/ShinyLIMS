@@ -1,4 +1,21 @@
 
+#' @title lims_Ccreate
+#' @description Creates tables for ShinyLIMS
+#' @param lims_database Database name.
+#' @param creds RDS object with database user and pass
+#' @param lims_types LIMS collections to be created.  Ussually read from lms_config.R
+#' @param valdoc validation json doc that used in creating metadata table
+#' @return returns "created LIMS successful" if sucsessful or error message if function fails. 
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  lims <- lims_create(lims_database,creds,lims_types,valdoc)
+#'  }
+#' }
+#' @rdname lims_create
+#' @export 
+
 lims_create <- function(lims_database,creds,lims_types,valdoc)
 {
 
